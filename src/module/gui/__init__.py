@@ -298,6 +298,8 @@ class MainWindow( QMainWindow ):
 			('HL2: E2 / Portal / TF2', GameTarget.V2007),
 			('Portal 2 / Alien Swarm', GameTarget.V2011),
 			('Garry\'s Mod', GameTarget.VGMOD),
+			('2013', GameTarget.V2013),
+			('vance', GameTarget.VVANCE),
 			('CS:GO / Strata', GameTarget.V2023),
 		]: gameDropdown.addItem(text, data)
 		gameDropdown.setCurrentData(Preset.game)
@@ -339,6 +341,19 @@ class MainWindow( QMainWindow ):
 		def on_changed_normalType(x: int):
 			self.backend.normalType = normalTypeDropdown.itemData(x)
 		normalTypeDropdown.currentIndexChanged.connect(on_changed_normalType)
+        
+        rightLayout.addWidget(QLabel('Plant ?'))
+
+		self.plantDropdown = plantDropdown = QDataComboBox()
+		rightLayout.addWidget(plantDropdown)
+		for text,data in [
+			('No', 0),
+			('Yes', 1)
+		]: plantDropdown.addItem(text, data)
+
+		def on_changed_plant(x: int):
+			#self.backend.plantDropdown = plantDropdown.itemData(x)
+		plantDropdown.currentIndexChanged.connect(on_changed_plant)
 
 		rightLayout.addWidget(QLabel('Target Scale'))
 		self.scaleTargetDropdown = scaleTargetDropdown = QDataComboBox()

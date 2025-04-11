@@ -36,9 +36,10 @@ class MaterialMode(IntEnum):
 
 	@staticmethod
 	def get_shader(mat: 'MaterialMode'):
-		if mat <= 1:  return 'PBR'
-		if mat <= 13: return 'VertexLitGeneric'
-		return 'LightmappedGeneric'
+        if GameTarget.VVANCE: return 'vertexlitpbr' if (is_model(mat)) else 'lightmappedpbr'
+        if mat <= 1: return 'PBR'
+        if mat <= 13: return 'VertexLitGeneric'
+        return 'LightmappedGeneric'
 
 	@staticmethod
 	def embed_envmap(mat: 'MaterialMode'):
@@ -51,14 +52,16 @@ class MaterialMode(IntEnum):
 class GameTarget(IntEnum):
 	V2007 = 1	# EP2, Portal, TF2
 	VGMOD = 2	# Garry's Mod
-	V2011 = 3	# Alien Swarm, Portal 2
-	V2023 = 4	# CS:GO, Strata Source
+	V2013 = 3	# 2013
+	VVANCE = 4	# 2013 as well
+	V2011 = 5	# Alien Swarm, Portal 2
+	V2023 = 6	# CS:GO, Strata Source
 
 	@staticmethod
 	def vtf_version(target: 'GameTarget'):
 		if target >= GameTarget.V2011: return 5
 		if target <= GameTarget.V2007: return 2
-		return 3
+		return 4
 
 
 class NormalType(IntEnum):
